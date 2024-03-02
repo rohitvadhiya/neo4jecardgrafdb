@@ -18,6 +18,7 @@ import java.util.List;
 public class User {
     @Id
     private String number;
+    private String name;
     private boolean flag;
     @Relationship(type = "User_Friend", direction = Relationship.Direction.OUTGOING)
     private List<UserContactsRelations> userContacts;

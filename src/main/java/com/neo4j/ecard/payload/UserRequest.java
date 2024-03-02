@@ -12,5 +12,6 @@ import java.util.List;
 public class UserRequest
 {
     private String number;
+    private String name;
     private List<UserContactsRelationReq> userContacts;
 }

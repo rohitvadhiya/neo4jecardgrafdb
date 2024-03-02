@@ -12,5 +12,6 @@ import java.util.List;
 public class UserContactsRelationReq
 {
     private String number;
+    private String name;
     private boolean flag;
 }

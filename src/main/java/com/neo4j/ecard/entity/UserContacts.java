@@ -18,6 +18,7 @@ public class UserContacts {
     @NotNull
     @Id
     private String number;
+    private String name;
     private boolean flag;
     private List<UserContactsRelations> userContactsList;
 }

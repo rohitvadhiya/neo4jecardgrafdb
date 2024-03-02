@@ -26,6 +26,7 @@ public class UserService {
     public User createUser(UserRequest userRequest) {
 
         String currentUserreqnum = userRequest.getNumber();
+        String currentUserReqName = userRequest.getName();
         List<UserContactsRelationReq> reqcontactslist = userRequest.getUserContacts();
         List<UserContacts> dbcontactlist = userContactsRepo.findAll();
         List<UserContactsRelations> listofrelations = new ArrayList<>();
@@ -37,6 +38,7 @@ public class UserService {
             for (UserContactsRelationReq userRequestcontacts : userRequest.getUserContacts()) {
                 UserContacts userContacts = new UserContacts();
                 userContacts.setNumber(userRequestcontacts.getNumber());
+                userContacts.setName(userRequestcontacts.getName());
                 userContacts.setFlag(false);
                 userContactsRepo.save(userContacts);
 
@@ -47,6 +49,7 @@ public class UserService {
             for (UserContacts userContacts : dbcontactlist) {
                 if (userContacts.getNumber().equals(currentUserreqnum)) {
                     userContacts.setNumber(currentUserreqnum);
+                    userContacts.setName(currentUserReqName);
                     userContacts.setFlag(true);
                     userContacts.setUserContactsList(listofrelations);
                     userContactsRepo.save(userContacts);
@@ -56,6 +59,7 @@ public class UserService {
             for (UserContactsRelationReq userRequestcontacts : userRequest.getUserContacts()) {
                 UserContacts userContacts = new UserContacts();
                 userContacts.setNumber(userRequestcontacts.getNumber());
+                userContacts.setName(userRequestcontacts.getName());
                 userContacts.setFlag(false);
                 userContactsRepo.save(userContacts);
 
@@ -64,6 +68,7 @@ public class UserService {
                 listofrelations.add(userContactsRelations);
             }
             user.setNumber(userRequest.getNumber());
+            user.setName(userRequest.getName());
             user.setFlag(true);
             user.setUserContacts(listofrelations);
             userRepo.save(user);
