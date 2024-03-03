@@ -3,7 +3,6 @@ package com.neo4j.ecard.service;
 import com.neo4j.ecard.entity.User;
 import com.neo4j.ecard.entity.UserContacts;
 import com.neo4j.ecard.entity.UserContactsRelations;
-import com.neo4j.ecard.payload.UserContactsListReq;
 import com.neo4j.ecard.payload.UserContactsRelationReq;
 import com.neo4j.ecard.payload.UserRequest;
 import com.neo4j.ecard.repo.UserContactsRepository;
@@ -39,9 +38,15 @@ public class UserService {
                 UserContacts userContacts = new UserContacts();
                 userContacts.setNumber(userRequestcontacts.getNumber());
                 userContacts.setName(userRequestcontacts.getName());
-                userContacts.setFlag(false);
+                for (UserContacts dbcontactslist:dbcontactlist) {
+                    if (userRequestcontacts.getNumber().equals(dbcontactslist.getNumber())) {
+                        userContacts.setFlag(true);
+                        break;
+                    } else {
+                        userContacts.setFlag(false);
+                    }
+                }
                 userContactsRepo.save(userContacts);
-
                 UserContactsRelations userContactsRelations = new UserContactsRelations();
                 userContactsRelations.setUserContacts(userContacts);
                 listofrelations.add(userContactsRelations);
